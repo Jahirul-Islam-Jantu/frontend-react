@@ -1,5 +1,6 @@
 import LayOut from "../components/LayOut.jsx";
 
+
 const HomePage = () => {
     return (
         <div>
