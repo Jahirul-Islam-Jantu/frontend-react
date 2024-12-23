@@ -14,45 +14,66 @@ const Navbar = () => {
                 <div className="col-12">
                     {/* Header Section */}
                     <div className="header-section">
-                        <div className="header container-fluid">
+                        <div className="header container-fluid flex justify-between items-center py-4">
                             {/* Logo */}
                             <div className="logo">
                                 <a href="/">
-                                    <img src="logo.png" alt="Logo" />
+                                    <img src="logo.png" alt="Logo" className="h-12 w-auto" />
                                 </a>
                             </div>
 
                             {/* Contact Section */}
-                            <div className="header-contact-section">
-                                <div className="header-contact">
-                                    <img src="call.png" alt="Call" />
-                                    <a className="flex" href="tel:+980009630">
-                                        call anytime <strong>+ 98 (000) - 9630</strong>
+                            <div className="header-contact-section hidden md:flex gap-8">
+                                <div className="header-contact flex items-center gap-2">
+                                    <img src="call.png" alt="Call" className="h-6 w-6" />
+                                    <a className="flex flex-col text-sm" href="tel:+980009630">
+                                        call anytime <strong className="text-base">+ 98 (000) - 9630</strong>
                                     </a>
                                 </div>
-                                <div className="header-contact">
-                                    <img src="email.png" alt="Email" />
-                                    <a className="flex" href="mailto:ambed@agrios.com">
-                                        send email <strong>ambed@agrios.com</strong>
+                                <div className="header-contact flex items-center gap-2">
+                                    <img src="email.png" alt="Email" className="h-6 w-6" />
+                                    <a className="flex flex-col text-sm" href="mailto:ambed@agrios.com">
+                                        send email <strong className="text-base">ambed@agrios.com</strong>
                                     </a>
                                 </div>
-                                <div className="header-contact">
-                                    <img src="location.png" alt="Location" />
-                                    <a className="flex" href="https://maps.app.goo.gl/7YGApNzmvrg57arRA">
-                                        380 St Kilda Road <strong>Melbourne, Australia</strong>
+                                <div className="header-contact flex items-center gap-2">
+                                    <img src="location.png" alt="Location" className="h-6 w-6" />
+                                    <a className="flex flex-col text-sm" href="https://maps.app.goo.gl/7YGApNzmvrg57arRA">
+                                        380 St Kilda Road <strong className="text-base">Melbourne, Australia</strong>
                                     </a>
                                 </div>
                             </div>
+
+                            {/* Toggle Button for Mobile */}
+                            <button
+                                className="block md:hidden text-black focus:outline-none z-20"
+                                onClick={toggleMenu}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-8 w-8"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
+                                    />
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
                     {/* Navbar Links */}
                     <div
-                        className={`navbar container-fluid ${
+                        className={`navbar ${
                             isMenuOpen ? "block" : "hidden"
-                        } md:block`}
+                        } md:block bg-[rgba(228,226,215,0.63)] py-2`}
                     >
-                        <ul className="flex flex-col md:flex-row justify-center gap-4 md:gap-8 text-sm md:text-base">
+                        <ul className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 text-sm md:text-base">
                             <li>
                                 <NavLink
                                     className={({ isActive }) => (isActive ? "active-item" : "pending-item")}
@@ -100,27 +121,6 @@ const Navbar = () => {
                             </li>
                         </ul>
                     </div>
-
-                    {/* Toggle Button for Mobile */}
-                    <button
-                        className="block md:hidden text-black focus:outline-none z-20"
-                        onClick={toggleMenu}
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
-                            />
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
@@ -128,6 +128,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 

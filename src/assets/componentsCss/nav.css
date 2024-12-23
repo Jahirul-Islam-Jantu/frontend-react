@@ -12,6 +12,7 @@
     justify-content: space-evenly;
     align-items: center;
     margin-bottom: 2vh;
+
 }
 
 .header-contact-section {
@@ -56,13 +57,21 @@
 
 .navbar {
     width: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(228, 226, 215, 0.63);
     padding: 10px 0px;
     position: absolute;
     z-index: 1000;
+    display: none;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.navbar.block {
+    display: flex; /* Visible in mobile view when toggled */
+    flex-direction: column;
+    align-items: center;
 }
 
 .navbar ul {
@@ -92,20 +101,24 @@
 }
 
 /* Ensure toggle works in mobile view */
-@media (max-width: 767px) {
+@media (min-width: 768px) {
     .navbar {
-        display: none; /* Hidden by default */
-    }
-
-    .navbar.block {
-        display: flex; /* Visible when menu is open */
+        display: flex; /* Always visible in desktop */
     }
 }
 
+/* Ensure proper spacing for contact section */
+.header-contact-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
-.hero-section{
-    position:absolute;
-
+@media (min-width: 768px) {
+    .header-contact-section {
+        flex-direction: row;
+        gap: 5rem;
+    }
 }
 /* Tailwind-based responsiveness and media query adjustments */
 .header-section {
