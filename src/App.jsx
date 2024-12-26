@@ -6,7 +6,7 @@ const App = () => {
     return (
         <div>
             <MenuRoutes/>
-            <h1 className='text-center shadow-slate-950 text-9xl text-zinc-900' >Hello world</h1>
+            <h1 className='text-center shadow-slate-950 text-9xl text-zinc-900' >Hello world from Main app</h1>
         </div>
     );
 };
