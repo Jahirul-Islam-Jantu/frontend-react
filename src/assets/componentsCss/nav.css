@@ -104,6 +104,10 @@
 @media (min-width: 768px) {
     .navbar {
         display: flex; /* Always visible in desktop */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
     }
 }
 
@@ -153,8 +157,8 @@
     @apply text-gray-500;
 }
 
-.navbar {
-    @apply flex justify-center items-center bg-[rgba(228,226,215,0.63)] py-2 absolute z-50;
+.navbar:active {
+    @apply flex justify-center items-center bg-[rgba(228,226,215,0.63)] absolute z-50;
 }
 
 .navbar ul {
