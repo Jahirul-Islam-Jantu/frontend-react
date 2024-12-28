@@ -49,6 +49,11 @@
     font-weight: 700;
     transition: 0.3s;
 }
+.header-contact-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
 
 .header-contact strong:hover {
     color: #878680;
@@ -64,12 +69,10 @@
     position: absolute;
     z-index: 1000;
     display: none;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
+
 }
 .navbar.block {
-    display: flex; /* Visible in mobile view when toggled */
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -100,31 +103,22 @@
     transition: 0.3s;
 }
 
-/* Ensure toggle works in mobile view */
+
 @media (min-width: 768px) {
     .navbar {
-        display: flex; /* Always visible in desktop */
+        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 1rem;
     }
-}
-
-/* Ensure proper spacing for contact section */
-.header-contact-section {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-@media (min-width: 768px) {
     .header-contact-section {
         flex-direction: row;
         gap: 5rem;
     }
 }
-/* Tailwind-based responsiveness and media query adjustments */
+
+
 .header-section {
     @apply flex flex-col items-center justify-center mt-5;
 }
@@ -165,7 +159,7 @@
     @apply flex flex-wrap justify-center gap-4 md:gap-8;
 }
 
-/* Optional: Adjust for custom utility styles */
+
 .active-item {
     @apply text-black font-extrabold border-l-4 border-black pl-2;
 }
