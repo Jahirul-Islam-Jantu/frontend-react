@@ -3,6 +3,7 @@ import Hero from "./Hero.jsx";
 
 
 
+
 const LayOut = ({img}) => {
     return (
         <div>
