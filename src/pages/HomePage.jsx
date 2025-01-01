@@ -1,4 +1,3 @@
-import LayOut from "../components/LayOut.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Carousel from "../components/Carousel.jsx";
 

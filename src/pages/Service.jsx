@@ -1,11 +1,13 @@
 import LayOut from "../components/LayOut.jsx";
+import Carousel2 from "../components/Carousel2.jsx";
+import Navbar from "../components/Navbar.jsx";
 
 
 const Service = () => {
     return (
         <div>
-            <LayOut img='service-hero.jpg'/>
-            <h1 className="text-9xl text-blue-900 text-center"> This is Service page</h1>
+            <Navbar/>
+            <Carousel2/>
         </div>
     );
 };

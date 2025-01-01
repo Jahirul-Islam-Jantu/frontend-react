@@ -48,7 +48,7 @@ const Carousel = () => {
                         key={index}
                         src={image}
                         alt={`Slide ${index + 1}`}
-                        className="w-auto"
+                        className="w-auto img-fluid object-cover"
                     />
                 ))}
             </div>
