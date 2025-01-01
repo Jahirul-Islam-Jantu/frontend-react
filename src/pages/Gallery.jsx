@@ -1,12 +1,12 @@
 import LayOut from "../components/LayOut.jsx";
-import Products from "../components/Products.jsx";
+import Quotes from "../components/Quotes.jsx";
 
 
 const Gallery = () => {
     return (
         <div>
             <LayOut img='gallery-hero.jpg'/>
-            <Products/>
+            <Quotes/>
         </div>
     );
 };
