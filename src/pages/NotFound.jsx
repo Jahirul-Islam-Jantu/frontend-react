@@ -3,8 +3,7 @@ import LayOut from "../components/LayOut.jsx";
 const NotFound = () => {
     return (
         <div>
-            <LayOut/>
-            <h1>Not Found</h1>
+            <h1 className="text-red-700 text-9xl text-center"> 404 Not Found</h1>
         </div>
     );
 };
