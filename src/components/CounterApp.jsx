@@ -9,7 +9,7 @@ const CounterApp = () => {
      }
 
     return (
-        <div className="flex justify-center align-center mb-20">
+        <div className="flex justify-center align-center ">
             <div className="container-fluid">
                 <div className="row">
                     <div className="card glass m-20">

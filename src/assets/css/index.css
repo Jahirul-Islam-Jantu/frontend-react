@@ -5,3 +5,19 @@
 body{
     font-family: Manrope !important;
 }
+
+.custom-button{
+    padding: 10px 30px;
+    border: 1px solid #00cfbd;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    transition: 0.3s ease-in-out;
+    color: #00cfbd;
+    :hover{
+        color: #ddd;
+        background-color: #00cfbd;
+        transition: 0.3s ease-in-out;
+    }
+}
