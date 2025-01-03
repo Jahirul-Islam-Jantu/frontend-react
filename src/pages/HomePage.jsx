@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar.jsx";
 import Carousel from "../components/Carousel.jsx";
+import CounterApp from "../components/CounterApp.jsx";
 
 
 const HomePage = () => {
@@ -7,7 +8,7 @@ const HomePage = () => {
         <div>
             <Navbar/>
             <Carousel/>
-            <h1 className="text-9xl text-blue-900 text-center"> This is Home page</h1>
+            <CounterApp/>
         </div>
     );
 };
