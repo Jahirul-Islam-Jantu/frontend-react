@@ -15,9 +15,9 @@ const TodoApp = () => {
             <InputForms onAddTodo={addTodo} />
             <div className="container-fluid">
                 <div className="row">
-                    <div className="card glass bg-amber-950  min-w-56 w-auto p-2 text-center text-pink-900 gap-2 ">
+                    <div className="card glass bg-gray-700  accent-transparent  min-w-56 w-auto p-4 text-center text-pink-900 gap-2 ">
                             {todos.length > 0 ? (todos.map((item, index) => ( <ul>
-                                <li className="flex flex-col justify-center align-middle border p-2 rounded-2xl bg-amber-200 bg-opacity-40 " key={index}>{item}</li> </ul>
+                                <li className="flex flex-col justify-center align-middle border hover:bg-gray-300 hover:text-gray-700 p-2 rounded-2xl text-white  " key={index}>{item}</li> </ul>
                             ))):(<p> No Todos Added! </p>)}
                     </div>
                 </div>

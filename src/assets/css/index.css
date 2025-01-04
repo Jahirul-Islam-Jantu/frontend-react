@@ -8,16 +8,18 @@ body{
 
 .custom-button{
     padding: 10px 30px;
-    border: 1px solid #00cfbd;
+    border: 1px solid #15191e;
     background-color: transparent;
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 16px;
+    font-weight: 500;
     line-height: 1;
     transition: 0.3s ease-in-out;
-    color: #00cfbd;
-    :hover{
-        color: #ddd;
-        background-color: #00cfbd;
-        transition: 0.3s ease-in-out;
-    }
+    border-radius: 10px;
+    color: #15191e;
+
+}
+.custom-button:hover{
+    color: #ddd;
+    background-color: #15191e;
+    transition: 0.3s ease-in-out;
 }
