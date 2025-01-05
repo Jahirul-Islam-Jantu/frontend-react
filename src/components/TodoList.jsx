@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const TodoList = () => {
-    const [item, setItem] = useState("");
+    const [item, setItem] = useState({ text: "", title: "", description: "", date: "" });
     const [todos, setTodos] = useState([]);
 
     // Fetch tasks from the backend
@@ -12,24 +12,28 @@ const TodoList = () => {
         });
     }, []);
 
+    // Handle changes in form fields
     const handleChange = (e) => {
-        setItem(e.target.value);
+        const { name, value } = e.target;
+        setItem({ ...item, [name]: value });
     };
 
+    // Submit new todo
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (item.trim()) {
+        if (item.text.trim()) {
             const newItem = {
-                text: item,
+                ...item,
                 isDone: false,
             };
             axios.post("http://localhost:5000/setTodos", newItem).then((response) => {
                 setTodos([...todos, response.data]);
-                setItem("");
+                setItem({ text: "", title: "", description: "", date: "" });
             });
         }
     };
 
+    // Handle marking a task as done
     const handleDone = (id) => {
         const task = todos.find((todo) => todo._id === id);
         axios.put(`http://localhost:5000/updateTodos/${id}`, { ...task, isDone: !task.isDone }).then((response) => {
@@ -37,6 +41,7 @@ const TodoList = () => {
         });
     };
 
+    // Handle updating a task
     const handleUpdate = (id) => {
         const taskToUpdate = todos.find((todo) => todo._id === id);
         const newText = prompt("Update the task text:", taskToUpdate.text);
@@ -49,11 +54,19 @@ const TodoList = () => {
         }
     };
 
-
+    // Handle deleting a task
     const handleDelete = (id) => {
-            axios.delete(`http://localhost:5000/deleteTodos/${id}`).then(() => {
-                setTodos(todos.filter((todo) => todo._id !== id));
-            });
+        axios.delete(`http://localhost:5000/deleteTodos/${id}`).then(() => {
+            setTodos(todos.filter((todo) => todo._id !== id));
+        });
+    };
+
+    // Calculate the remaining time for the task
+    const calculateTimeRemaining = (date) => {
+        const difference = new Date(date) - new Date();
+        const hours = Math.floor(difference / 3600000);
+        const minutes = Math.floor((difference % 3600000) / 60000);
+        return `${hours}h ${minutes}m remaining`;
     };
 
     return (
@@ -61,10 +74,30 @@ const TodoList = () => {
             <div className="custom-todo">
                 <h1>Todo List App</h1>
                 <input
-                    id="inputElement"
+                    name="title"
+                    type="text"
+                    placeholder="Title"
+                    value={item.title}
+                    onChange={handleChange}
+                />
+                <input
+                    name="description"
+                    type="text"
+                    placeholder="Description"
+                    value={item.description}
+                    onChange={handleChange}
+                />
+                <input
+                    name="date"
+                    type="datetime-local"
+                    value={item.date}
+                    onChange={handleChange}
+                />
+                <input
+                    name="text"
                     type="text"
                     placeholder="Add Todo..."
-                    value={item}
+                    value={item.text}
                     onChange={handleChange}
                     onKeyDown={(e) => e.key === "Enter" && handleSubmit(e)}
                 />
@@ -87,7 +120,14 @@ const TodoList = () => {
                                         <img src={todo.isDone ? "ok.png" : "notok.png"} alt="" width="25px" />
                                         <span className="todo-text">{todo.text}</span>
                                     </div>
-                                    <button className="delete-button" onClick={()=>handleUpdate(todo._id)} >update</button>
+                                    <div>
+                                        <p><strong>Title:</strong> {todo.title}</p>
+                                        <p><strong>Description:</strong> {todo.description}</p>
+                                        <p><strong>Due:</strong> {calculateTimeRemaining(todo.date)}</p>
+                                    </div>
+                                    <button className="delete-button" onClick={() => handleUpdate(todo._id)}>
+                                        Update
+                                    </button>
                                     <button className="delete-button" onClick={() => handleDelete(todo._id)}>
                                         <img src="itemDelete.png" width="25px" alt="" />
                                     </button>
@@ -104,7 +144,6 @@ const TodoList = () => {
 };
 
 export default TodoList;
-
 
 
 
