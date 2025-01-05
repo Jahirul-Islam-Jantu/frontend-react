@@ -26,7 +26,7 @@ body{
 .custom-todo{
     border: 1px solid #00b3f0;
     padding:10px 20px;
-    max-width: 400px;
+    min-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,10 +60,41 @@ body{
         color: #00b3f0;
         transition: 0.2s ease-out;
     }
+    .delete-button{
+        background: #ffffff;
+        color: #fff;
+        transition: 0.2s ease-in;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid #00b3f0;
+    }
+    .delete-button:hover{
+        background: #00b3f0;
+        color: #fff;
+        transition: 0.2s ease-in;
+    }
 
 }
 .show-Todo{
     border-top: 2px solid #ff6f70;
     width: 100%;
-    padding: 20px;
+    padding-top:20px;
+
+    ul{
+        li{
+            display: grid;
+            grid-template-columns:0.1fr 0.2fr 2fr 0.3fr ;
+
+            button{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img{
+
+                }
+            }
+
+        }
+    }
+
 }
