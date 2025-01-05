@@ -37,13 +37,23 @@ const TodoList = () => {
         });
     };
 
+    const handleUpdate = (id) => {
+        const taskToUpdate = todos.find((todo) => todo._id === id);
+        const newText = prompt("Update the task text:", taskToUpdate.text);
+
+        if (newText !== null) {
+            const updatedTask = { ...taskToUpdate, text: newText };
+            axios.put(`http://localhost:5000/updateTodos/${id}`, updatedTask).then((response) => {
+                setTodos(todos.map((todo) => (todo._id === id ? response.data : todo)));
+            });
+        }
+    };
+
+
     const handleDelete = (id) => {
-        const isConfirmed = confirm("Are you sure you want to delete this task?");
-        if (isConfirmed) {
             axios.delete(`http://localhost:5000/deleteTodos/${id}`).then(() => {
                 setTodos(todos.filter((todo) => todo._id !== id));
             });
-        }
     };
 
     return (
@@ -77,6 +87,7 @@ const TodoList = () => {
                                         <img src={todo.isDone ? "ok.png" : "notok.png"} alt="" width="25px" />
                                         <span className="todo-text">{todo.text}</span>
                                     </div>
+                                    <button className="delete-button" onClick={()=>handleUpdate(todo._id)} >update</button>
                                     <button className="delete-button" onClick={() => handleDelete(todo._id)}>
                                         <img src="itemDelete.png" width="25px" alt="" />
                                     </button>
