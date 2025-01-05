@@ -5,11 +5,19 @@ const TodoList = () => {
     const [item, setItem] = useState({ text: "", title: "", description: "", date: "" });
     const [todos, setTodos] = useState([]);
 
-    // Fetch tasks from the backend
+    // Fetch tasks from the backend or local storage
     useEffect(() => {
-        axios.get("http://localhost:5000/getTodos").then((response) => {
-            setTodos(response.data);
-        });
+        axios.get("http://localhost:5000/getTodos")
+            .then((response) => {
+                setTodos(response.data);
+                // Save to localStorage in case MongoDB data is fetched
+                localStorage.setItem('todos', JSON.stringify(response.data));
+            })
+            .catch(() => {
+                // Fallback to localStorage if API call fails
+                const storedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+                setTodos(storedTodos);
+            });
     }, []);
 
     // Handle changes in form fields
@@ -26,19 +34,37 @@ const TodoList = () => {
                 ...item,
                 isDone: false,
             };
-            axios.post("http://localhost:5000/setTodos", newItem).then((response) => {
-                setTodos([...todos, response.data]);
-                setItem({ text: "", title: "", description: "", date: "" });
-            });
+            axios.post("http://localhost:5000/setTodos", newItem)
+                .then((response) => {
+                    setTodos([...todos, response.data]);
+                    localStorage.setItem('todos', JSON.stringify([...todos, response.data]));
+                    setItem({ text: "", title: "", description: "", date: "" });
+                })
+                .catch(() => {
+                    // Save to localStorage if MongoDB is not available
+                    const updatedTodos = [...todos, newItem];
+                    setTodos(updatedTodos);
+                    localStorage.setItem('todos', JSON.stringify(updatedTodos));
+                    setItem({ text: "", title: "", description: "", date: "" });
+                });
         }
     };
 
     // Handle marking a task as done
     const handleDone = (id) => {
         const task = todos.find((todo) => todo._id === id);
-        axios.put(`http://localhost:5000/updateTodos/${id}`, { ...task, isDone: !task.isDone }).then((response) => {
-            setTodos(todos.map((todo) => (todo._id === id ? response.data : todo)));
-        });
+        axios.put(`http://localhost:5000/updateTodos/${id}`, { ...task, isDone: !task.isDone })
+            .then((response) => {
+                const updatedTodos = todos.map((todo) => (todo._id === id ? response.data : todo));
+                setTodos(updatedTodos);
+                localStorage.setItem('todos', JSON.stringify(updatedTodos));
+            })
+            .catch(() => {
+                // Update in localStorage if MongoDB update fails
+                const updatedTodos = todos.map((todo) => (todo._id === id ? { ...todo, isDone: !todo.isDone } : todo));
+                setTodos(updatedTodos);
+                localStorage.setItem('todos', JSON.stringify(updatedTodos));
+            });
     };
 
     // Handle updating a task
@@ -48,17 +74,35 @@ const TodoList = () => {
 
         if (newText !== null) {
             const updatedTask = { ...taskToUpdate, text: newText };
-            axios.put(`http://localhost:5000/updateTodos/${id}`, updatedTask).then((response) => {
-                setTodos(todos.map((todo) => (todo._id === id ? response.data : todo)));
-            });
+            axios.put(`http://localhost:5000/updateTodos/${id}`, updatedTask)
+                .then((response) => {
+                    const updatedTodos = todos.map((todo) => (todo._id === id ? response.data : todo));
+                    setTodos(updatedTodos);
+                    localStorage.setItem('todos', JSON.stringify(updatedTodos));
+                })
+                .catch(() => {
+                    // Update in localStorage if MongoDB update fails
+                    const updatedTodos = todos.map((todo) => (todo._id === id ? updatedTask : todo));
+                    setTodos(updatedTodos);
+                    localStorage.setItem('todos', JSON.stringify(updatedTodos));
+                });
         }
     };
 
     // Handle deleting a task
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/deleteTodos/${id}`).then(() => {
-            setTodos(todos.filter((todo) => todo._id !== id));
-        });
+        axios.delete(`http://localhost:5000/deleteTodos/${id}`)
+            .then(() => {
+                const updatedTodos = todos.filter((todo) => todo._id !== id);
+                setTodos(updatedTodos);
+                localStorage.setItem('todos', JSON.stringify(updatedTodos));
+            })
+            .catch(() => {
+                // Delete from localStorage if MongoDB delete fails
+                const updatedTodos = todos.filter((todo) => todo._id !== id);
+                setTodos(updatedTodos);
+                localStorage.setItem('todos', JSON.stringify(updatedTodos));
+            });
     };
 
     // Calculate the remaining time for the task
@@ -144,6 +188,7 @@ const TodoList = () => {
 };
 
 export default TodoList;
+
 
 
 
