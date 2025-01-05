@@ -23,44 +23,44 @@ body{
     background-color: #15191e;
     transition: 0.3s ease-in-out;
 }
-.custom-todo{
+.custom-todo {
     border: 1px solid #00b3f0;
-    padding:10px 20px;
+    padding: 10px 20px;
     min-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 
-    h1{
+    h1 {
         color: #491eff;
         font-weight: bold;
         font-size: 32px;
         border-radius: 10px;
-
     }
-    input{
+
+    input {
         border: 1px solid #00b3f0;
         border-radius: 5px;
         padding: 10px 20px;
-
     }
-    button{
+
+    button {
         background: #00b3f0;
         color: #fff;
         transition: 0.2s ease-in;
         padding: 10px 20px;
         border-radius: 5px;
-
-
     }
-    button:hover{
+
+    button:hover {
         background: #ffffff;
         border: 1px solid #00b3f0;
         color: #00b3f0;
         transition: 0.2s ease-out;
     }
-    .delete-button{
+
+    .delete-button {
         background: #ffffff;
         color: #fff;
         transition: 0.2s ease-in;
@@ -68,33 +68,41 @@ body{
         border-radius: 5px;
         border: 1px solid #00b3f0;
     }
-    .delete-button:hover{
+
+    .delete-button:hover {
         background: #00b3f0;
         color: #fff;
         transition: 0.2s ease-in;
     }
-
 }
-.show-Todo{
+
+.show-Todo {
     border-top: 2px solid #ff6f70;
     width: 100%;
-    padding-top:20px;
+    padding-top: 20px;
 
-    ul{
-        li{
-            display: grid;
-            grid-template-columns:0.1fr 0.2fr 2fr 0.3fr ;
+    ul {
+        padding: 0;
+        list-style: none;
 
-            button{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                img{
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
 
-                }
-            }
+        .todo-text {
+            flex-grow: 1;
+            margin-right: 10px;
+            font-size: 18px;
+        }
 
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
-
 }
