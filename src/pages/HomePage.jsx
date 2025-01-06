@@ -3,6 +3,7 @@ import Carousel from "../components/Carousel.jsx";
 import CounterApp from "../components/CounterApp.jsx";
 import TodoApp from "../components/TodoApp.jsx";
 import TodoList from "../components/TodoList.jsx";
+import Footer from "../components/Footer.jsx";
 
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
             <TodoApp/>
             <CounterApp/>
             <TodoList />
+            <Footer/>
 
         </div>
     );
